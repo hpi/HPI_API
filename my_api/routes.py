@@ -105,7 +105,7 @@ def generate_route_handler(libfunc: FunctionType) -> Callable[[], ResponseVal]:
         # wrap TypeError, common for non-event-like functions to fail
         # when argument count doesnt match
         try:
-            resp: Any = libfunc()
+            resp: Any = libfunc(request.args)
         except TypeError as e:
             return {
                 "error": "TypeError calling HPI function, assuming not enough arguments passed",
